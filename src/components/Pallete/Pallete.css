@@ -31,3 +31,25 @@ h3 {
 .fav:hover {
     cursor: pointer;
 }
+
+.palette-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.btn-see-more {
+    margin-top: 10px;
+    text-decoration: none;
+    border: 1px solid grey;
+    padding: 10px;
+    font-size: 12px;
+    border-radius: 5px;
+    color: #000;
+}
+
+.btn-see-more:hover {
+    cursor: pointer;
+    background-color: rgb(37, 37, 37);
+    color: #fff;
+}
