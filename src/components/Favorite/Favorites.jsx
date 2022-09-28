@@ -1,13 +1,18 @@
-import Favorite from './Favorite';
-import './Favorites.css';
+import Favorite from "./Favorite";
+import "./Favorites.css";
 
 const Favorites = ({ favorites }) => {
   return (
-    <div className='favorite-container'>
-      <h2>Mis Favoritos</h2>
-      {favorites.map((favorite) => (
-        <Favorite key={favorite.id} favorite={favorite} />
-      ))}
+    <div className="favorite-container">
+      <h2 className="fav-title">Mis Favoritos</h2>
+
+      {favorites.length === 0 ? (
+        <span>No hay paletas por aquí...</span>
+      ) : (
+        favorites.map((favorite) => (
+          <Favorite key={favorite.id} favorite={favorite} />
+        ))
+      )}
     </div>
   );
 };
