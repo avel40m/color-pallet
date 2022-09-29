@@ -1,30 +1,36 @@
-import './App.css';
-import {Routes, Route} from 'react-router-dom'
-import Home from './routes/Home/Home';
-import PaletteDisplay from './routes/Pallete/PalleteDisplay';
-import { useEffect, useState } from 'react';
-import { getColorPalettes } from './service';
-import { ColorPalettesContext} from './context/ColorPalettesContext'
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import Home from "./routes/Home/Home";
+import PaletteDisplay from "./routes/Pallete/PalleteDisplay";
+import { useContext, useEffect } from "react";
+import { getColorPalettes } from "./service";
+import { ColorPalettesContext } from "./context/ColorPalettesContext";
+import Navigation from './routes/Navigation/Navigation';
+import Login from './routes/Login/Login';
+import PaletteCreation from './routes/Pallete/PalleteCreation';
 
 function App() {
-  const [colorPalettes, setColorPalettes] = useState([]);
-  useEffect(()=> {
+  const { setColorPalettes } = useContext(ColorPalettesContext);
+
+  useEffect(() => {
     getColorPalettes()
-    .then((data) => {
-      setColorPalettes(data);
-    })
-    .catch((err) => console.log(err));
-  }, [])
+      .then((data) => {
+        setColorPalettes(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
-      <div className='App'>
-        <ColorPalettesContext.Provider value={{colorPalettes, setColorPalettes}}>
-          <Routes>
-            <Route path='/' element={<Home/>}/>
-            <Route path='/palette/:id' element={<PaletteDisplay/>}/>
-          </Routes>
-        </ColorPalettesContext.Provider>
-      </div>
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<Navigation />}>
+          <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="palette/:id" element={<PaletteDisplay />} />
+          <Route path="palette/create" element={<PaletteCreation />} />
+        </Route>
+      </Routes>
+    </div>
   );
 }
 
